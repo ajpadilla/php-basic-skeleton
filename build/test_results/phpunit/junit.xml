@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites>
+  <testsuite name="tests" tests="4" assertions="2" errors="0" warnings="0" failures="0" skipped="0" time="0.021180">
+    <testsuite name="CodelyTv\Tests\Mooc\Courses\Application\Create\CourseCreatorTest" file="/app/tests/src/Mooc/Courses/Application/Create/CourseCreatorTest.php" tests="1" assertions="0" errors="0" warnings="0" failures="0" skipped="0" time="0.020422">
+      <testcase name="it_should_crate_a_valid_course" class="CodelyTv\Tests\Mooc\Courses\Application\Create\CourseCreatorTest" classname="CodelyTv.Tests.Mooc.Courses.Application.Create.CourseCreatorTest" file="/app/tests/src/Mooc/Courses/Application/Create/CourseCreatorTest.php" line="22" assertions="0" time="0.020422"/>
+    </testsuite>
+    <testsuite name="CodelyTv\Tests\Mooc\Courses\Infractructure\FileCourseRepositoryTest" file="/app/tests/src/Mooc/Courses/Infractructure/FileCourseRepositoryTest.php" tests="3" assertions="2" errors="0" warnings="0" failures="0" skipped="0" time="0.000758">
+      <testcase name="it_should_save_a_course" class="CodelyTv\Tests\Mooc\Courses\Infractructure\FileCourseRepositoryTest" classname="CodelyTv.Tests.Mooc.Courses.Infractructure.FileCourseRepositoryTest" file="/app/tests/src/Mooc/Courses/Infractructure/FileCourseRepositoryTest.php" line="14" assertions="0" time="0.000323"/>
+      <testcase name="it_should_return_an_existing_course" class="CodelyTv\Tests\Mooc\Courses\Infractructure\FileCourseRepositoryTest" classname="CodelyTv.Tests.Mooc.Courses.Infractructure.FileCourseRepositoryTest" file="/app/tests/src/Mooc/Courses/Infractructure/FileCourseRepositoryTest.php" line="22" assertions="1" time="0.000277"/>
+      <testcase name="it_should_not_return_a_non_existing_course" class="CodelyTv\Tests\Mooc\Courses\Infractructure\FileCourseRepositoryTest" classname="CodelyTv.Tests.Mooc.Courses.Infractructure.FileCourseRepositoryTest" file="/app/tests/src/Mooc/Courses/Infractructure/FileCourseRepositoryTest.php" line="32" assertions="1" time="0.000158"/>
+    </testsuite>
+  </testsuite>
+</testsuites>
