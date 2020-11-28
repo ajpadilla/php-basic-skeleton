@@ -4,13 +4,14 @@ declare(strict_types = 1);
 
 namespace CodelyTv\Tests\Mooc\Courses;
 
-use CodelyTv\Mooc\Courses\Infrastructure\FileCourseRepository;
+use CodelyTv\Mooc\Courses\Domain\CourseRepository;
+use CodelyTv\Tests\Mooc\Shared\Infrastructure\PhpUnit\MoocContextInfrastructureTestCase;
 use PHPUnit\Framework\TestCase;
 
-abstract class CoursesModuleInfrastructureTestCase extends TestCase
+abstract class CoursesModuleInfrastructureTestCase extends MoocContextInfrastructureTestCase
 {
-    protected function repository(): FileCourseRepository
+    protected function repository(): CourseRepository
     {
-        return new  FileCourseRepository();
+        return $this->service(CourseRepository::class);
     }
 }

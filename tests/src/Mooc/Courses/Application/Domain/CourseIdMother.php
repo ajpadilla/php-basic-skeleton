@@ -4,7 +4,8 @@ declare(strict_types = 1);
 namespace CodelyTv\Tests\Mooc\Courses\Application\Domain;
 
 
-use CodelyTv\Mooc\Courses\Domain\CourseId;
+
+use CodelyTv\Mooc\Shared\Domain\Course\CourseId;
 use CodelyTv\Tests\Shared\Domain\UuidMother;
 
 final class CourseIdMother

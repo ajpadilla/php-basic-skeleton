@@ -1,12 +1,12 @@
 <?php
 
 
-namespace CodelyTv\Mooc\Courses\Infrastructure;
+namespace CodelyTv\Mooc\Courses\Infrastructure\Persistence;
 
 
 use CodelyTv\Mooc\Courses\Domain\Course;
-use CodelyTv\Mooc\Courses\Domain\CourseId;
 use CodelyTv\Mooc\Courses\Domain\CourseRepository;
+use CodelyTv\Mooc\Shared\Domain\Course\CourseId;
 
 class FileCourseRepository implements CourseRepository
 {
