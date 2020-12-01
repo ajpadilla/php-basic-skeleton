@@ -7,6 +7,10 @@ services:
     autoconfigure: true
     autowire: true
 
+  # Configure
+  _instanceof:
+    CodelyTv\Shared\Domain\Bus\Event\DomainEventSubscriber:
+      tags: ['codely.domain_event_subscriber']
 
   CodelyTv\Apps\Mooc\Backend\Controller\:
     resource: '../src/Controller'
@@ -15,6 +19,13 @@ services:
   CodelyTv\:
     resource: '../../../../src'
 
+    # Dependencies
+  CodelyTv\Shared\Infrastructure\Bus\Event\SymfonySyncEventBus:
+    arguments: [!tagged codely.domain_event_subscriber]
+
   CodelyTv\Shared\Infrastructure\Symfony\AddJsonBodyToRequestListener:
     tags:
       - { name: kernel.event_listener, event: kernel.request, method: onKernelRequest }
+
+  # Instance selector
+  CodelyTv\Shared\Domain\Bus\Event\DomainEventPublisher: '@CodelyTv\Shared\Infrastructure\Bus\Event\SymfonySyncDomainEventPublisher'

@@ -37,6 +37,15 @@ final class Course extends AggregateRoot
         $this->duration = $duration;
     }
 
+    public static function crate(CourseId $id, CourseName $name, CourseDuration $duration): self
+    {
+        $course = new self($id, $name, $duration);
+
+        $course->record(new CourseCreatedDomainEvent($id->value(), $name->value(), $duration->value()));
+
+        return $course;
+    }
+
     /**
      * @return CourseId
      */

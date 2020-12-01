@@ -24,6 +24,11 @@ class Uuid
         $this->value = $value;
     }
 
+    public static function random(): self
+    {
+        return new self(RamseyUuid::uuid4()->toString());
+    }
+
     /**
      * @return string
      */

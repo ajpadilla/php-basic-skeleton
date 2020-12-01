@@ -18,7 +18,7 @@ final class MoocEntityManagerFactory
         $prefixes               = DoctrinePrefixesSearcher::inPath(__DIR__ . '/../../../../Mooc', 'CodelyTv\Mooc');
         $dbalCustomTypesClasses = DbalTypesSearcher::inPath(__DIR__ . '/../../../../Mooc', 'Mooc');
 
-        print_r($parameters);
+        //print_r($parameters);
 
         return DoctrineEntityManagerFactory::create(
             $parameters,

@@ -4,6 +4,8 @@ declare(strict_types = 1);
 namespace CodelyTv\Tests\Mooc\Courses\Application\Create;
 
 use CodelyTv\Mooc\Courses\Application\Create\CourseCreator;
+use CodelyTv\Mooc\Courses\Domain\CourseCreatedDomainEvent;
+use CodelyTv\Tests\Mooc\Courses\Application\Domain\CourseCreatedDomainEventMother;
 use CodelyTv\Tests\Mooc\Courses\Application\Domain\CourseMother;
 use CodelyTv\Tests\Mooc\Courses\CoursesModuleUnitTestCase;
 
@@ -15,7 +17,7 @@ final class CourseCreatorTest extends CoursesModuleUnitTestCase
     {
         parent::setUp();
 
-        $this->creator = new CourseCreator($this->repository());
+        $this->creator = new CourseCreator($this->repository(), $this->domainEventPublisher());
     }
 
     /** @test */
@@ -25,7 +27,10 @@ final class CourseCreatorTest extends CoursesModuleUnitTestCase
 
         $course = CourseMother::fromRequest($request);
 
+        $domainEvent = CourseCreatedDomainEventMother::fromCourse($course);
+
         $this->shouldSave($course);
+        $this->shouldPublishDomainEvent($domainEvent);
 
         $this->creator->__invoke($request);
     }
