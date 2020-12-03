@@ -3,7 +3,9 @@ declare(strict_types = 1);
 
 namespace CodelyTv\Mooc\Courses\Application\Create;
 
-final class CreateCourseRequest
+use CodelyTv\Shared\Domain\Bus\Command\Command;
+
+final class CreateCourseCommand implements Command
 {
     /** @var string */
     private $id;
@@ -15,7 +17,7 @@ final class CreateCourseRequest
     private $duration;
 
     /**
-     * CreateCourseRequest constructor.
+     * CreateCourseCommand constructor.
      * @param string $id
      * @param string $name
      * @param string $duration

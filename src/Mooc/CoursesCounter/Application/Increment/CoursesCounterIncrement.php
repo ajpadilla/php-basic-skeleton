@@ -9,7 +9,7 @@ use CodelyTv\Mooc\CoursesCounter\Domain\CoursesCounterId;
 use CodelyTv\Mooc\CoursesCounter\Domain\CoursesCounterRepository;
 use CodelyTv\Mooc\Shared\Domain\Course\CourseId;
 use CodelyTv\Shared\Domain\Bus\Event\DomainEventPublisher;
-use Doctrine\ORM\Id\UuidGenerator;
+use CodelyTv\Shared\Domain\UuidGenerator;
 
 final class CoursesCounterIncrement
 {

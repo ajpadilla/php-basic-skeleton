@@ -3,8 +3,10 @@
 namespace CodelyTv\Tests\Shared\Infrastructure\PhpUnit;
 
 
+use CodelyTv\Shared\Domain\Bus\Command\Command;
 use CodelyTv\Shared\Domain\Bus\Event\DomainEvent;
 use CodelyTv\Shared\Domain\Bus\Event\DomainEventPublisher;
+use CodelyTv\Shared\Domain\Bus\Event\EventBus;
 use CodelyTv\Shared\Domain\UuidGenerator;
 use CodelyTv\Tests\Shared\Domain\TestUtils;
 use Mockery;
@@ -14,7 +16,7 @@ use Mockery\MockInterface;
 
 abstract class UnitTestCase extends MockeryTestCase
 {
-    private $domainEventPublisher;
+    private $eventBus;
     private $uuidGenerator;
 
     protected function mock(string $className): MockInterface
@@ -24,16 +26,16 @@ abstract class UnitTestCase extends MockeryTestCase
 
     protected function shouldPublishDomainEvent(DomainEvent $domainEvent): void
     {
-        $this->domainEventPublisher()
+        $this->eventBus()
             ->shouldReceive('publish')
             ->with($this->similarTo($domainEvent))
             ->andReturnNull();
     }
 
-    /** @return DomainEventPublisher|MockInterface */
-    protected function domainEventPublisher(): MockInterface
+    /** @return EventBus|MockInterface */
+    protected function eventBus(): MockInterface
     {
-        return $this->domainEventPublisher = $this->domainEventPublisher ?: $this->mock(DomainEventPublisher::class);
+        return $this->eventBus = $this->eventBus ?: $this->mock(EventBus::class);
     }
 
     protected function shouldGenerateUuid(string $uuid): void
@@ -54,6 +56,11 @@ abstract class UnitTestCase extends MockeryTestCase
     protected function notify(DomainEvent $event, callable $subscriber): void
     {
         $subscriber($event);
+    }
+
+    protected function dispatch(Command $command, callable $commandHandler): void
+    {
+        $commandHandler($command);
     }
 
     protected function isSimilar($expected, $actual): bool

@@ -37,7 +37,7 @@ final class Course extends AggregateRoot
         $this->duration = $duration;
     }
 
-    public static function crate(CourseId $id, CourseName $name, CourseDuration $duration): self
+    public static function create(CourseId $id, CourseName $name, CourseDuration $duration): self
     {
         $course = new self($id, $name, $duration);
 

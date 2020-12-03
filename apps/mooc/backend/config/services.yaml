@@ -12,20 +12,58 @@ services:
     CodelyTv\Shared\Domain\Bus\Event\DomainEventSubscriber:
       tags: ['codely.domain_event_subscriber']
 
+    CodelyTv\Shared\Domain\Bus\Command\CommandHandler:
+      tags: ['codely.command_handler']
+
+    #CodelyTv\Shared\Domain\Bus\Query\QueryHandler:
+      #tags: ['codely.query_handler']
+
   CodelyTv\Apps\Mooc\Backend\Controller\:
     resource: '../src/Controller'
     tags: ['controller.service_arguments']
 
-  CodelyTv\:
-    resource: '../../../../src'
+  #CodelyTv\Apps\Mooc\Backend\Command\:
+    #resource: '../src/Command'
+    #tags: ['console.command']
 
-    # Dependencies
-  CodelyTv\Shared\Infrastructure\Bus\Event\SymfonySyncEventBus:
+  # Wire
+  CodelyTv\Shared\:
+    resource: '../../../../src/Shared'
+
+  CodelyTv\Mooc\:
+    resource: '../../../../src/Mooc'
+
+  # -- TAGGING --
+  CodelyTv\Shared\Infrastructure\Bus\Event\InMemory\InMemorySymfonyEventBus:
     arguments: [!tagged codely.domain_event_subscriber]
+    lazy: true
+
+  CodelyTv\Shared\Infrastructure\Bus\Event\DomainEventMapping:
+    arguments: [!tagged codely.domain_event_subscriber]
+
+  CodelyTv\Shared\Infrastructure\Bus\Event\DomainEventSubscriberLocator:
+    arguments: [!tagged codely.domain_event_subscriber]
+
+  CodelyTv\Tests\Shared\Infrastructure\Doctrine\DatabaseConnections:
+    arguments: [!tagged codely.database_connection]
 
   CodelyTv\Shared\Infrastructure\Symfony\AddJsonBodyToRequestListener:
     tags:
       - { name: kernel.event_listener, event: kernel.request, method: onKernelRequest }
 
+  CodelyTv\Shared\Infrastructure\Symfony\ApiExceptionListener:
+    tags:
+      - { name: kernel.event_listener, event: kernel.exception, method: onException }
+
+
+  # -- APP DEFINITIONS --
+  # Command/Query Handlers
+  CodelyTv\Shared\Infrastructure\Bus\Command\InMemorySymfonyCommandBus:
+    arguments: [!tagged codely.command_handler]
+
+  #CodelyTv\Shared\Infrastructure\Bus\Query\InMemorySymfonyQueryBus:
+    #arguments: [!tagged codely.query_handler]
+
   # Instance selector
   CodelyTv\Shared\Domain\Bus\Event\DomainEventPublisher: '@CodelyTv\Shared\Infrastructure\Bus\Event\SymfonySyncDomainEventPublisher'
+
