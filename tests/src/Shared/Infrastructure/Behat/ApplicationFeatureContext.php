@@ -38,8 +38,10 @@ final class ApplicationFeatureContext implements Context
      */
     public function iSendAnEventToTheEventBus(PyStringNode $event)
     {
-        /*$domainEvent = $this->deserializer->deserialize($event->getRaw());
+        $domainEvent = $this->deserializer->deserialize($event->getRaw());
 
-        $this->bus->publish($domainEvent);*/
+        var_export('DEBUG!!!');
+
+        $this->bus->publish($domainEvent);
     }
 }

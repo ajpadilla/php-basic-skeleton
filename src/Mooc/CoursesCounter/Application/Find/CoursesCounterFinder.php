@@ -1,8 +1,8 @@
 <?php
 
+declare(strict_types = 1);
 
 namespace CodelyTv\Mooc\CoursesCounter\Application\Find;
-
 
 use CodelyTv\Mooc\CoursesCounter\Domain\CoursesCounterNotExist;
 use CodelyTv\Mooc\CoursesCounter\Domain\CoursesCounterRepository;
@@ -16,14 +16,14 @@ final class CoursesCounterFinder
         $this->repository = $repository;
     }
 
-    public function __invoke(): coursesCounterResponse
+    public function __invoke(): CoursesCounterResponse
     {
         $counter = $this->repository->search();
 
-        if (null == $counter){
+        if (null === $counter) {
             throw new CoursesCounterNotExist();
         }
 
-        return new coursesCounterResponse($counter->total()->value());
+        return new CoursesCounterResponse($counter->total()->value());
     }
 }

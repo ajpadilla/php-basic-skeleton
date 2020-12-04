@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types = 1);
 
 namespace CodelyTv\Mooc\CoursesCounter\Application\Increment;
@@ -10,12 +11,11 @@ use function Lambdish\Phunctional\apply;
 
 final class IncrementCoursesCounterOnCourseCreated implements DomainEventSubscriber
 {
+    private $incrementer;
 
-    private $increment;
-
-    public function __construct(CoursesCounterIncrement $increment)
+    public function __construct(CoursesCounterIncrementer $incrementer)
     {
-        $this->increment = $increment;
+        $this->incrementer = $incrementer;
     }
 
     public static function subscribedTo(): array
@@ -26,6 +26,7 @@ final class IncrementCoursesCounterOnCourseCreated implements DomainEventSubscri
     public function __invoke(CourseCreatedDomainEvent $event): void
     {
         $courseId = new CourseId($event->aggregateId());
-        apply($this->increment, [$courseId]);
+
+        apply($this->incrementer, [$courseId]);
     }
 }

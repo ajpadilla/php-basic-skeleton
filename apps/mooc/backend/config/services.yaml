@@ -15,8 +15,8 @@ services:
     CodelyTv\Shared\Domain\Bus\Command\CommandHandler:
       tags: ['codely.command_handler']
 
-    #CodelyTv\Shared\Domain\Bus\Query\QueryHandler:
-      #tags: ['codely.query_handler']
+    CodelyTv\Shared\Domain\Bus\Query\QueryHandler:
+      tags: ['codely.query_handler']
 
   CodelyTv\Apps\Mooc\Backend\Controller\:
     resource: '../src/Controller'
@@ -61,8 +61,8 @@ services:
   CodelyTv\Shared\Infrastructure\Bus\Command\InMemorySymfonyCommandBus:
     arguments: [!tagged codely.command_handler]
 
-  #CodelyTv\Shared\Infrastructure\Bus\Query\InMemorySymfonyQueryBus:
-    #arguments: [!tagged codely.query_handler]
+  CodelyTv\Shared\Infrastructure\Bus\Query\InMemorySymfonyQueryBus:
+    arguments: [!tagged codely.query_handler]
 
   # Instance selector
   CodelyTv\Shared\Domain\Bus\Event\DomainEventPublisher: '@CodelyTv\Shared\Infrastructure\Bus\Event\SymfonySyncDomainEventPublisher'
